@@ -15,7 +15,7 @@ from tempfile import NamedTemporaryFile
 @st.cache_resource
 def create_datastax_connection():
 
-    cloud_config= {'secure_connect_bundle': 'secure-connect-bhavesh-astra-test.zip'}
+    cloud_config= {'secure_connect_bundle': 'secure-connect-temp-db.zip'}
 
     with open("bhavesh_astra_test-token.json") as f:
         secrets = json.load(f)
@@ -31,8 +31,8 @@ def create_datastax_connection():
 def main():
 
     index_placeholder = None
-    st.set_page_config(page_title = "Chat with your PDF using Llama2 & Llama Index", page_icon="🦙")
-    st.header('🦙 Chat with your PDF using Llama2 model & Llama Index')
+    st.set_page_config(page_title = "Chat with Deduct AI ", page_icon="🕵️‍♀️")
+    st.header('Hello ! This is Deduct AI built with patience and love by Sunil Kumar 👦') 
     
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -49,8 +49,8 @@ def main():
 
     session = create_datastax_connection()
 
-    os.environ['GRADIENT_ACCESS_TOKEN'] = "Enter your Token"
-    os.environ['GRADIENT_WORKSPACE_ID'] = "Enter your Workspace ID"
+    os.environ['GRADIENT_ACCESS_TOKEN'] = "wvdlvkI7UFke9VUk1DQ1nVyxwSjKc2IX"
+    os.environ['GRADIENT_WORKSPACE_ID'] = "d7f5c932-179e-4944-b4f8-d745c350df4e_workspace"
 
     llm = GradientBaseModelLLM(base_model_slug="llama2-7b-chat", max_tokens=400)
 
@@ -67,7 +67,7 @@ def main():
     set_global_service_context(service_context)
 
     with st.sidebar:
-        st.subheader('Upload Your PDF File')
+        st.subheader('Feed Deduct AI 🕵️‍♂️')
         docs = st.file_uploader('⬆️ Upload your PDF & Click to process',
                                 accept_multiple_files = False, 
                                 type=['pdf'])
@@ -84,24 +84,24 @@ def main():
                     st.session_state.activate_chat = True
 
     if st.session_state.activate_chat == True:
-        if prompt := st.chat_input("Ask your question from the PDF?"):
-            with st.chat_message("user", avatar = '👨🏻'):
+        if prompt := st.chat_input("Ask your question to Deduct AI?"):
+            with st.chat_message("user", avatar = '👦'):
                 st.markdown(prompt)
             st.session_state.messages.append({"role": "user", 
-                                              "avatar" :'👨🏻',
+                                              "avatar" :'👦',
                                               "content": prompt})
 
             query_index_placeholder = st.session_state.query_engine
             pdf_response = query_index_placeholder.query(prompt)
             cleaned_response = pdf_response.response
-            with st.chat_message("assistant", avatar='🤖'):
+            with st.chat_message("assistant", avatar='🕵️‍♀️'):
                 st.markdown(cleaned_response)
             st.session_state.messages.append({"role": "assistant", 
-                                              "avatar" :'🤖',
+                                              "avatar" :'🕵️‍♀️',
                                               "content": cleaned_response})
         else:
             st.markdown(
-                'Upload your PDFs to chat'
+                'Upload your Content to the chat'
                 )
 
 
