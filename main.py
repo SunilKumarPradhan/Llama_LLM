@@ -17,7 +17,7 @@ def create_datastax_connection():
 
     cloud_config= {'secure_connect_bundle': 'secure-connect-temp-db.zip'}
 
-    with open("bhavesh_astra_test-token.json") as f:
+    with open("temp_db-token.json") as f:
         secrets = json.load(f)
 
     CLIENT_ID = secrets["clientId"]
