@@ -45,8 +45,12 @@ def main():
 
     session = create_datastax_connection()
 
-    os.environ['GRADIENT_ACCESS_TOKEN'] = "wvdlvkI7UFke9VUk1DQ1nVyxwSjKc2IX"
-    os.environ['GRADIENT_WORKSPACE_ID'] = "d7f5c932-179e-4944-b4f8-d745c350df4e_workspace"
+
+    GRADIENT_ACCESS_TOKEN = st.secrets["my_secret"]["gradient_access_token"]
+    GRADIENT_WORKSPACE_ID = st.secrets["my_secret"]["gradient_workspace_id"]
+    
+    os.environ['GRADIENT_ACCESS_TOKEN'] = GRADIENT_ACCESS_TOKEN
+    os.environ['GRADIENT_WORKSPACE_ID'] = GRADIENT_WORKSPACE_ID
 
     llm = GradientBaseModelLLM(base_model_slug="llama2-7b-chat", max_tokens=400)
 
